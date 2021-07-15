@@ -4,10 +4,12 @@ import axios, { AxiosRequestConfig } from 'axios'
 import { forEach } from 'lodash-es'
 import global, { GlobalStatus } from './global'
 import templates from './templates'
+import user, { UserProps } from './user'
 
 export interface GlobalDataProps {
   templates: any;
   global: GlobalStatus;
+  user: UserProps;
 }
 
 export interface ActionPayload {
@@ -41,11 +43,11 @@ export function actionWrapper(url: string, commitName: string, config: AxiosRequ
     return resp.data
   }
 }
-
-const store = createStore({
+const store = createStore<GlobalDataProps>({
   modules: {
     templates,
-    global
+    global,
+    user
   }
 })
 

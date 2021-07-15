@@ -13,13 +13,14 @@
 import { defineComponent, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import TemplateList from '../components/TemplateList.vue'
+import { GlobalDataProps } from '../store/index';
 export default defineComponent({
   name: 'Home',
   components: {
     TemplateList
   },
   setup() {
-    const store = useStore()
+    const store = useStore<GlobalDataProps>()
     const testData = computed(() => store.state.templates.data)
     onMounted(() => {
       store.dispatch('fetchTemplates', { searchParams : { pageIndex: 0, pageSize: 4 }})

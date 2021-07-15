@@ -1,12 +1,25 @@
 import { Module } from 'vuex'
-import { actionWrapper } from './index'
+import { actionWrapper, GlobalDataProps } from './index'
 
-const templates = {
+export interface TemplateProps {
+  id: number;
+  title: string;
+  coverImg: string;
+  author: string;
+  copiedCount: number; 
+}
+export interface TemplatesProps {
+  data: TemplateProps[];
+  totalTemplates: number;
+}
+
+const templates: Module<TemplatesProps, GlobalDataProps>  = {
   state: {
     data: [],
+    totalTemplates: 0
   },
   mutations: {
-    fetchTemplates(state: any, rawData: any) {
+    fetchTemplates(state, rawData) {
       const { count, list } = rawData.data
       state.data = [ ...state.data, ...list ]
       state.totalTemplates = count
@@ -16,8 +29,8 @@ const templates = {
     fetchTemplates: actionWrapper('/templates', 'fetchTemplates'),
   },
   getters: {
-    getTemplateById: (state: any, getters: any, rootState: any) => (id: number) => {
-      return state.data.find((t: any) => t.id === id)
+    getTemplateById: (state, getters, rootState) => (id: number) => {
+      return state.data.find((t) => t.id === id)
     }
   }
 }

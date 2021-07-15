@@ -1,19 +1,20 @@
 <template>
-  <div class="work-detail-container">
-    detail-container
+  <div>
+    works
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue'
 export default defineComponent({
-  setup () {
+  setup() {
     return {
-      
+
     }
   }
 })
 </script>
 
-<style scoped lang="less">
+<style>
+
 </style>

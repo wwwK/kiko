@@ -11,7 +11,7 @@
                 <a-button size="large" type="primary">使用该模版创建</a-button>
               </div>
             </template>
-            <a-card-meta :title="item.title">
+            <a-card-meta :title="item.item">
               <template v-slot:description>
                 <div class="description-detail">
                   <span>作者：{{item.author}}</span>
@@ -36,12 +36,21 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
+import { useRouter } from 'vue-router'
+import { TemplateProps } from '../store/templates'
 export default defineComponent({
   name: 'template-list',
   props: {
     list: {
-      type: Array,
+      type: Array as PropType<TemplateProps[]>,
       required: true
+    }
+  },
+  setup(){
+    const router = useRouter()
+
+    return {
+      router
     }
   }
 })
